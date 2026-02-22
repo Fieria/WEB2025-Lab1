@@ -30,6 +30,112 @@ function loadCartFromLocalStorage() {
     }
 }
 
+// Функция для добавления товара в корзину
+function addToCart(productId) {
+    const product = products.find(p => p.id === productId);
+    if (!product) return;
+    
+    const existingItem = cart.find(item => item.id === productId);
+    
+    if (existingItem) {
+        existingItem.quantity += 1;
+    } else {
+        cart.push({
+            id: product.id,
+            name: product.name,
+            price: product.price,
+            quantity: 1
+        });
+    }
+    
+    saveCartToLocalStorage();
+    renderCart();
+}
+
+// Функция для удаления товара из корзины
+function removeFromCart(productId) {
+    cart = cart.filter(item => item.id !== productId);
+    saveCartToLocalStorage();
+    renderCart();
+}
+
+// Функция для изменения количества товара
+function updateQuantity(productId, change) {
+    const item = cart.find(item => item.id === productId);
+    if (!item) return;
+    
+    item.quantity += change;
+    
+    // Если количество стало 0 или меньше, удаляем товар
+    if (item.quantity <= 0) {
+        removeFromCart(productId);
+        return;
+    }
+    
+    saveCartToLocalStorage();
+    renderCart();
+}
+
+// Функция для отображения корзины
+function renderCart() {
+    const cartContent = document.getElementById('cartContent');
+    const totalAmount = document.getElementById('totalAmount');
+    
+    if (cart.length === 0) {
+        cartContent.innerHTML = '<p class="cart__empty">Корзина пуста</p>';
+        totalAmount.textContent = '0';
+        return;
+    }
+    
+    cartContent.innerHTML = '';
+    let total = 0;
+    
+    cart.forEach(item => {
+        const itemTotal = item.price * item.quantity;
+        total += itemTotal;
+        
+        const cartItem = document.createElement('div');
+        cartItem.className = 'cart__item';
+        cartItem.innerHTML = `
+            <p class="cart__item-name">${item.name}</p>
+            <div class="cart__item-controls">
+                <button class="cart__item-remove" data-id="${item.id}">&times;</button>
+                <button class="cart__item-decrease" data-id="${item.id}">-</button>
+                <span class="cart__item-quantity">${item.quantity}</span>
+                <button class="cart__item-increase" data-id="${item.id}">+</button>
+                <span class="cart__item-total">${itemTotal} ₽</span>
+            </div>
+        `;
+        
+        cartContent.appendChild(cartItem);
+    });
+    
+    totalAmount.textContent = total;
+    
+    // Добавляем обработчики для кнопок изменения количества
+    cartContent.querySelectorAll('.cart__item-increase').forEach(button => {
+        button.addEventListener('click', () => {
+            const productId = parseInt(button.getAttribute('data-id'));
+            updateQuantity(productId, 1);
+        });
+    });
+    
+    cartContent.querySelectorAll('.cart__item-decrease').forEach(button => {
+        button.addEventListener('click', () => {
+            const productId = parseInt(button.getAttribute('data-id'));
+            updateQuantity(productId, -1);
+        });
+    });
+    
+    // Добавляем обработчики для кнопок удаления
+    cartContent.querySelectorAll('.cart__item-remove').forEach(button => {
+        button.addEventListener('click', () => {
+            const productId = parseInt(button.getAttribute('data-id'));
+            removeFromCart(productId);
+        });
+    });
+}
+
 // Функция для отображения товаров
 function renderProducts() {
     const productsGrid = document.getElementById('productsGrid');
@@ -44,11 +150,19 @@ function renderProducts() {
                 <img src="${product.image}" alt="${product.name}" class="product-card__image">
                 <h3 class="product-card__title">${product.name}</h3>
                 <p class="product-card__price">${product.price} ₽</p>
-                <button class="product-card__button" type="button">Добавить в корзину</button>
+                <button class="product-card__button" type="button" data-id="${product.id}">Добавить в корзину</button>
             </article>
         `;
         
         productsGrid.appendChild(li);
+    });
+    
+    // Добавляем обработчики для кнопок "Добавить в корзину"
+    productsGrid.querySelectorAll('.product-card__button').forEach(button => {
+        button.addEventListener('click', () => {
+            const productId = parseInt(button.getAttribute('data-id'));
+            addToCart(productId);
+        });
     });
 }
 
@@ -56,6 +170,7 @@ function renderProducts() {
 document.addEventListener('DOMContentLoaded', () => {
     loadCartFromLocalStorage();
     renderProducts();
+    renderCart();
 });
 
 // Открытие модального окна
