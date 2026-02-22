@@ -1,17 +1,17 @@
 // Массив товаров
 let products = [
-    { id: 1, name: 'Товар № 1', price: 1000, image: '' },
-    { id: 2, name: 'Товар № 2', price: 1000, image: '' },
-    { id: 3, name: 'Товар № 3', price: 1000, image: '' },
-    { id: 4, name: 'Товар № 4', price: 1000, image: '' },
-    { id: 5, name: 'Товар № 5', price: 1000, image: '' },
-    { id: 6, name: 'Товар № 6', price: 1000, image: '' },
-    { id: 7, name: 'Товар № 7', price: 1000, image: '' },
-    { id: 8, name: 'Товар № 8', price: 1000, image: '' },
-    { id: 9, name: 'Товар № 9', price: 1000, image: '' },
-    { id: 10, name: 'Товар № 10', price: 1000, image: '' },
-    { id: 11, name: 'Товар № 11', price: 1000, image: '' },
-    { id: 12, name: 'Товар № 12', price: 1000, image: '' }
+    { id: 1, name: 'сумка Emma', price: 2500, image: 'images/IMG_20260223_002159_934.jpg' },
+    { id: 2, name: 'сумка Olivia', price: 3200, image: 'images/IMG_20260223_002200_066.jpg' },
+    { id: 3, name: 'сумка Sophia', price: 1800, image: 'images/IMG_20260223_002200_183.jpg' },
+    { id: 4, name: 'сумка Isabella', price: 4500, image: 'images/IMG_20260223_002200_291.jpg' },
+    { id: 5, name: 'сумка Charlotte', price: 2900, image: 'images/IMG_20260223_002200_313.jpg' },
+    { id: 6, name: 'сумка Amelia', price: 3600, image: 'images/IMG_20260223_002200_483.jpg' },
+    { id: 7, name: 'сумка Mia', price: 2200, image: 'images/IMG_20260223_002200_511.jpg' },
+    { id: 8, name: 'сумка Harper', price: 3800, image: 'images/IMG_20260223_002200_524.jpg' },
+    { id: 9, name: 'сумка Evelyn', price: 2700, image: 'images/IMG_20260223_002200_598.jpg' },
+    { id: 10, name: 'сумка Abigail', price: 4100, image: 'images/IMG_20260223_002200_661.jpg' },
+    { id: 11, name: 'сумка Emily', price: 3300, image: 'images/IMG_20260223_002200_733.jpg' },
+    { id: 12, name: 'сумка Elizabeth', price: 2400, image: 'images/IMG_20260223_002200_789.jpg' }
 ];
 
 // Массив корзины
@@ -150,7 +150,7 @@ function renderProducts() {
                 <img src="${product.image}" alt="${product.name}" class="product-card__image">
                 <h3 class="product-card__title">${product.name}</h3>
                 <p class="product-card__price">${product.price} ₽</p>
-                <button class="product-card__button" type="button" data-id="${product.id}">Добавить в корзину</button>
+                <button class="product-card__button" type="button" data-id="${product.id}">+</button>
             </article>
         `;
         
@@ -207,18 +207,27 @@ cancelButton.addEventListener('click', () => {
 orderForm.addEventListener('submit', (e) => {
     e.preventDefault();
     
-    // Закрываем модальное окно
-    orderModal.classList.remove('active');
+    // Получаем все поля формы
+    const firstName = document.getElementById('firstName').value.trim();
+    const lastName = document.getElementById('lastName').value.trim();
+    const address = document.getElementById('address').value.trim();
+    const phone = document.getElementById('phone').value.trim();
     
-    // Показываем сообщение об успешном создании заказа
-    successMessage.classList.add('active');
-    
-    // Скрываем сообщение через 3 секунды
-    setTimeout(() => {
-        successMessage.classList.remove('active');
-    }, 3000);
-    
-    // Очищаем форму
-    orderForm.reset();
+    // Проверяем, что все поля заполнены
+    if (firstName && lastName && address && phone) {
+        // Закрываем модальное окно
+        orderModal.classList.remove('active');
+        
+        // Показываем сообщение об успешном создании заказа
+        successMessage.classList.add('active');
+        
+        // Скрываем сообщение через 3 секунды
+        setTimeout(() => {
+            successMessage.classList.remove('active');
+        }, 3000);
+        
+        // Очищаем форму
+        orderForm.reset();
+    }
 });
 
