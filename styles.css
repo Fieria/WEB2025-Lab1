@@ -155,3 +155,37 @@
     background-color: #0056b3;
 }
 
+/* Медиа-запросы для адаптивности */
+
+/* Планшет (768px - 1024px) */
+@media (max-width: 1024px) {
+    .products__grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .container {
+        flex-direction: column;
+    }
+    
+    .products {
+        width: 100%;
+        flex: 1;
+    }
+    
+    .cart {
+        width: 100%;
+        flex: 1;
+    }
+}
+
+/* Телефон (до 768px) */
+@media (max-width: 768px) {
+    .products__grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .product-card {
+        width: 100%;
+    }
+}
+
