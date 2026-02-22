@@ -10,6 +10,14 @@
     <header class="header">
         <div class="container">
             <h1 class="header__title">Магазин</h1>
+            <nav class="header__nav">
+                <ul class="nav__list">
+                    <li class="nav__item"><a href="#" class="nav__link">Главная</a></li>
+                    <li class="nav__item"><a href="#" class="nav__link">Каталог</a></li>
+                    <li class="nav__item"><a href="#" class="nav__link">О нас</a></li>
+                    <li class="nav__item"><a href="#" class="nav__link">Контакты</a></li>
+                </ul>
+            </nav>
         </div>
     </header>
 
@@ -17,9 +25,50 @@
         <div class="container">
             <section class="products" id="productsSection">
                 <h2 class="products__title">Каталог товаров</h2>
-                <div class="products__grid" id="productsGrid">
-                    <!-- Товары будут добавлены через JavaScript -->
-                </div>
+                <ul class="products__grid" id="productsGrid">
+                    <li class="products__item">
+                        <article class="product-card" data-id="1">
+                            <h3 class="product-card__title">Товар № 1</h3>
+                            <p class="product-card__price">1000 ₽</p>
+                            <button class="product-card__button" type="button">Добавить в корзину</button>
+                        </article>
+                    </li>
+                    <li class="products__item">
+                        <article class="product-card" data-id="2">
+                            <h3 class="product-card__title">Товар № 2</h3>
+                            <p class="product-card__price">1000 ₽</p>
+                            <button class="product-card__button" type="button">Добавить в корзину</button>
+                        </article>
+                    </li>
+                    <li class="products__item">
+                        <article class="product-card" data-id="3">
+                            <h3 class="product-card__title">Товар № 3</h3>
+                            <p class="product-card__price">1000 ₽</p>
+                            <button class="product-card__button" type="button">Добавить в корзину</button>
+                        </article>
+                    </li>
+                    <li class="products__item">
+                        <article class="product-card" data-id="4">
+                            <h3 class="product-card__title">Товар № 4</h3>
+                            <p class="product-card__price">1000 ₽</p>
+                            <button class="product-card__button" type="button">Добавить в корзину</button>
+                        </article>
+                    </li>
+                    <li class="products__item">
+                        <article class="product-card" data-id="5">
+                            <h3 class="product-card__title">Товар № 5</h3>
+                            <p class="product-card__price">1000 ₽</p>
+                            <button class="product-card__button" type="button">Добавить в корзину</button>
+                        </article>
+                    </li>
+                    <li class="products__item">
+                        <article class="product-card" data-id="6">
+                            <h3 class="product-card__title">Товар № 6</h3>
+                            <p class="product-card__price">1000 ₽</p>
+                            <button class="product-card__button" type="button">Добавить в корзину</button>
+                        </article>
+                    </li>
+                </ul>
             </section>
 
             <section class="cart" id="cartSection">
