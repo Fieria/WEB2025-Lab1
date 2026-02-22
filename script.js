@@ -14,6 +14,22 @@ let products = [
     { id: 12, name: 'Товар № 12', price: 1000, image: '' }
 ];
 
+// Массив корзины
+let cart = [];
+
+// Функция для сохранения корзины в localStorage
+function saveCartToLocalStorage() {
+    localStorage.setItem('cart', JSON.stringify(cart));
+}
+
+// Функция для загрузки корзины из localStorage
+function loadCartFromLocalStorage() {
+    const savedCart = localStorage.getItem('cart');
+    if (savedCart) {
+        cart = JSON.parse(savedCart);
+    }
+}
+
 // Функция для отображения товаров
 function renderProducts() {
     const productsGrid = document.getElementById('productsGrid');
@@ -38,6 +54,7 @@ function renderProducts() {
 
 // Отображение товаров при загрузке страницы
 document.addEventListener('DOMContentLoaded', () => {
+    loadCartFromLocalStorage();
     renderProducts();
 });
 
