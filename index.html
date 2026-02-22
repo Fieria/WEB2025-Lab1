@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Магазин - Интернет-магазин товаров</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1 class="header__title">Магазин</h1>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <section class="products" id="productsSection">
+                <h2 class="products__title">Каталог товаров</h2>
+                <div class="products__grid" id="productsGrid">
+                    <!-- Товары будут добавлены через JavaScript -->
+                </div>
+            </section>
+
+            <section class="cart" id="cartSection">
+                <h2 class="cart__title">Корзина</h2>
+                <div class="cart__content" id="cartContent">
+                    <p class="cart__empty">Корзина пуста</p>
+                </div>
+                <div class="cart__total" id="cartTotal">
+                    <p class="cart__total-text">Итого: <span id="totalAmount">0</span> ₽</p>
+                    <button class="cart__checkout-button" id="checkoutButton">Оформить заказ</button>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Модальное окно формы заказа -->
+    <div class="modal" id="orderModal">
+        <div class="modal__overlay" id="modalOverlay"></div>
+        <div class="modal__content">
+            <button class="modal__close" id="modalClose">&times;</button>
+            <h2 class="modal__title">Оформление заказа</h2>
+            <form class="order-form" id="orderForm">
+                <div class="form-group">
+                    <label for="firstName" class="form-label">Имя *</label>
+                    <input type="text" id="firstName" name="firstName" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label for="lastName" class="form-label">Фамилия *</label>
+                    <input type="text" id="lastName" name="lastName" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label for="address" class="form-label">Адрес доставки *</label>
+                    <input type="text" id="address" name="address" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone" class="form-label">Контактный номер телефона *</label>
+                    <input type="tel" id="phone" name="phone" class="form-input" required>
+                </div>
+                <button type="submit" class="form-submit">Создать заказ</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Сообщение об успешном создании заказа -->
+    <div class="message" id="successMessage">
+        <p class="message__text">Заказ создан!</p>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
